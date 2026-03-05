@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Equipo CV HTML">
+    <meta name="keywords" content="curriculum vitae, hoja de vida, educación, estudios, HTML, examen">
+    <meta name="description" content="Página de educación de la hoja de vida con historial académico y formulario para agregar estudios">
+    <title>Hoja de Vida - Educación</title>
+
+  </head>
+  <body>
+    <img src="assets/logo.svg" alt="Logo SVG">
+
+    <p>Título<br>Datos Personales</p>
+
+    <p>
+      Enlaces de Menú:
+      <a href="index.html">Personal</a>
+      <a href="educacion.html">Educación</a>
+      <a href="experiencia.html">Experiencia</a>
+    </p>
+
+    <h2>Educación</h2>
+
+    <table border="1" id="tablaEducacion">
+      <thead>
+        <tr>
+          <th>Año</th>
+          <th>Institución</th>
+          <th>Lugar</th>
+          <th>¿Culminó?</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpoTabla">
+        <tr>
+          <td>2023</td>
+          <td>colegio mayor de nuestra señora</td>
+          <td>manizales, caldas</td>
+          <td>si</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Agregar Estudios</h3>
+
+    <p>
+      <label for="anio">Año:</label>
+      <select id="anio" name="anio">
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+      </select>
+    </p>
+
+    <p>
+      <label id="errorInstitucion" hidden>El campo Institución es obligatorio</label><br>
+      <label for="institucion">Institución:</label>
+      <input type="text" id="institucion" name="institucion">
+    </p>
+
+    <p>
+      <label for="lugar">Lugar:</label><br>
+      <textarea id="lugar" name="lugar"></textarea>
+    </p>
+
+    <p>
+      ¿Culminó?
+      <input type="radio" id="siCulmino" name="culmino" value="Si" checked>
+      <label for="siCulmino">Si</label>
+      <input type="radio" id="noCulmino" name="culmino" value="No">
+      <label for="noCulmino">No</label>
+    </p>
+
+    <button type="button" onclick="agregarEstudio()">Enviar</button>
+
+    <p>Pie de Página</p>
+
+    <script>
+      function agregarEstudio() {
+        var anio = document.getElementById('anio').value;
+        var institucion = document.getElementById('institucion').value;
+        var lugar = document.getElementById('lugar').value;
+        var culmino = document.querySelector('input[name="culmino"]:checked');
+        var culminoValor = culmino ? culmino.value : '';
+
+        if (institucion === '') {
+          document.getElementById('errorInstitucion').hidden = false;
+          return;
+        }
+        document.getElementById('errorInstitucion').hidden = true;
+
+        var tbody = document.getElementById('cuerpoTabla');
+        var nuevaFila = document.createElement('tr');
+        nuevaFila.innerHTML =
+          '<td>' + anio + '</td>' +
+          '<td>' + institucion + '</td>' +
+          '<td>' + lugar + '</td>' +
+          '<td>' + culminoValor + '</td>';
+
+        tbody.appendChild(nuevaFila);
+
+        document.getElementById('institucion').value = '';
+        document.getElementById('lugar').value = '';
+        document.getElementById('siCulmino').checked = true;
+      }
+    </script>
+  </body>
+</html>
