@@ -66,6 +66,51 @@
       <input type="text" id="institucion" name="institucion">
     </p>
 
+    <p>
+      <label for="lugar">Lugar:</label><br>
+      <textarea id="lugar" name="lugar"></textarea>
+    </p>
 
+    <p>
+      ¿Culminó?
+      <input type="radio" id="siCulmino" name="culmino" value="Si" checked>
+      <label for="siCulmino">Si</label>
+      <input type="radio" id="noCulmino" name="culmino" value="No">
+      <label for="noCulmino">No</label>
+    </p>
+
+    <button type="button" onclick="agregarEstudio()">Enviar</button>
+
+    <p>Pie de Página</p>
+
+    <script>
+      function agregarEstudio() {
+        var anio = document.getElementById('anio').value;
+        var institucion = document.getElementById('institucion').value;
+        var lugar = document.getElementById('lugar').value;
+        var culmino = document.querySelector('input[name="culmino"]:checked');
+        var culminoValor = culmino ? culmino.value : '';
+
+        if (institucion === '') {
+          document.getElementById('errorInstitucion').hidden = false;
+          return;
+        }
+        document.getElementById('errorInstitucion').hidden = true;
+
+        var tbody = document.getElementById('cuerpoTabla');
+        var nuevaFila = document.createElement('tr');
+        nuevaFila.innerHTML =
+          '<td>' + anio + '</td>' +
+          '<td>' + institucion + '</td>' +
+          '<td>' + lugar + '</td>' +
+          '<td>' + culminoValor + '</td>';
+
+        tbody.appendChild(nuevaFila);
+
+        document.getElementById('institucion').value = '';
+        document.getElementById('lugar').value = '';
+        document.getElementById('siCulmino').checked = true;
+      }
+    </script>
   </body>
 </html>
